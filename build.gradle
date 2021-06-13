@@ -1,0 +1,69 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        kotlin_version = '1.4.21'
+    }
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url 'https://repo1.maven.org/maven2/' }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.0.1"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10"
+    }
+}
+
+plugins {
+    id 'plugin.version' apply true
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url 'https://repo1.maven.org/maven2/' }
+    }
+    logger.error("project = $project,plugins = ${project.plugins}")
+    //输出的 log 中没有 plugin.version
+}
+
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+subprojects() {
+    def releaseTasks = project.getTasksByName("assembleRelease", false)
+    copyApkFile(releaseTasks, project)
+}
+
+def copyApkFile(Set<Task> tasks, Project project) {
+    def fromDir = "/build/outputs/apk/release"
+    for (task in tasks) {
+        def dir = project.getProjectDir().getAbsolutePath()
+        println "assemble release dir = $dir"
+        //我们目前存放打包后apk的目录
+        def apkDir = dir + fromDir
+        def file = new File(apkDir)
+        //在task执行完成之后
+        if (file.exists()) {
+            def isDelete = delete(apkDir)
+            println "del: $isDelete"
+        }
+        task.doLast {
+            if (file.exists()) {
+                //将生成的apk整个目录复制到我们指定位置
+                copy {
+                    println "copy dir = ${file.getAbsolutePath()}"
+                    from apkDir
+                    into rootProject.getRootDir().getAbsolutePath() + "/apk/"
+                }
+            }
+        }
+    }
+}

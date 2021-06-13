@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_45p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.38" />
+
+    <com.seagazer.animlogoview.AnimLogoView
+        android:id="@+id/anim_logo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:autoPlay="false"
+        app:gradientAnimDuration="2000"
+        app:gradientColor="@color/colorAccent"
+        app:logoName="不忘初心，方得始终"
+        app:offsetAnimDuration="1500"
+        app:showGradient="true"
+        app:textColor="#000814"
+        app:textPadding="2dp"
+        app:textSize="28sp"
+        app:verticalOffset="50dp" />
+
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guide_45p" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

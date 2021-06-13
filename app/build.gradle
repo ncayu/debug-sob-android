@@ -1,0 +1,176 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+logger.error("plugins = ${plugins}")
+//输出的 log 中没有 plugin.version
+static def buildTimes() {
+    return new Date().format("yyyyMMdd HH_mm")
+}
+
+android {
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('../android_sign.jks')
+            storePassword 'debugAndroid'
+            keyAlias = 'debug'
+            keyPassword 'debugAndroid'
+        }
+    }
+
+    compileSdkVersion Versions.compileSdk
+
+    defaultConfig {
+        applicationId Versions.applicationId
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+        versionCode Versions.appVersionCode
+        versionName Versions.appVersionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "APP_BASE_URL", "\"https://moonlightshadow.cn\"")
+            buildConfigField("String", "UNION_BASE_URL", "\"https://api.sunofbeach.net\"")
+        }
+        debug {
+            signingConfig signingConfigs.release
+            buildConfigField("String", "APP_BASE_URL", "\"https://moonlightshadow.cn\"")
+            buildConfigField("String", "UNION_BASE_URL", "\"https://api.sunofbeach.net\"")
+//            buildConfigField("String", "APP_BASE_URL", "\"http://172.27.35.1:2021\"")
+
+        }
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    // Temporary fix until alpha10
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+        exclude 'META-INF/*.kotlin_module'
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            if (output.outputFile == null && !output.outputFile.name.endsWith('.apk')) {
+                contiue
+            }
+
+            def info = ""
+
+            // 因为维度存在，所以一个 variant 可能由有一个以上的 Flavor 交叉组成，所以这里 Flavor 名也是复数的
+            variant.productFlavors.each {
+                info = info + it.name + "_"
+            }
+
+            println("TAG:${variant.name}/${info}")
+            if ('release' == variant.buildType.name) {
+                outputFileName = info + variant.buildType.name + '_v_' + variant.versionName + '_' + variant.versionCode + '_' + buildTimes() + '.apk'
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation project(path: ':lib_sw')
+    implementation project(path: ':lib_log_format')
+
+    implementation Deps.appcompat
+    implementation Deps.constraintLayout
+    implementation Deps.binding
+    implementation Deps.eventBus
+    implementation Deps.retrofit2
+    implementation Deps.retrofit2AdapterRxJava2
+    implementation Deps.okHttp3LoggingInterceptor
+    implementation Deps.okHttp3
+    implementation Deps.retrofit2ConverterGson
+    implementation Deps.autodispose
+    implementation Deps.rxAndroid2
+    implementation Deps.adapterCymChad
+    implementation Deps.glideV4
+    implementation Deps.glideV4Compiler
+    implementation Deps.toastLib
+    implementation Deps.permissionLib
+    implementation project(path: ':lib_common_utils')
+    //as 新建act的时候，都自动增加的依赖，暂时留着
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    //先临时放这里，方便调试
+    implementation 'com.github.ff-frida:frida-imageload-util:0.0.1'
+    implementation project(path: ':lib_common_widget')
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation project(path: ':lib_logo')
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Koin for Android
+    implementation 'org.koin:koin-android:2.2.1'
+    // or Koin for Lifecycle scoping
+    implementation 'org.koin:koin-androidx-scope:2.2.1'
+    // or Koin for Android Architecture ViewModel
+    implementation 'org.koin:koin-androidx-viewmodel:2.2.1'
+
+    //协程
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-rc01'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-rc01'
+
+    //live data
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-beta01'
+
+
+//    implementation 'com.umeng.umsdk:common:9.1.0' // (必选)版本号
+//    implementation 'com.umeng.umsdk:asms:1.1.3'
+//    implementation 'com.umeng.umsdk:crash:0.0.4'
+//    implementation 'com.umeng.umsdk:oaid_lenovo:1.0.0' // (可选)
+//    implementation 'com.umeng.umsdk:oaid_mi:1.0.0' // (可选)
+//    implementation 'com.umeng.umsdk:oaid_oppo:1.0.4' // (可选)
+//    implementation 'com.umeng.umsdk:oaid_vivo:1.0.0.1'
+    implementation  'com.umeng.umsdk:common:9.4.0'// 必选
+    implementation  'com.umeng.umsdk:asms:1.2.3'// 必选
+    implementation 'com.umeng.umsdk:apm:1.2.0' // 错误分析升级为独立产品U-APM可按需集成
+
+    //datastore
+    implementation 'androidx.datastore:datastore-preferences:1.0.0-alpha05'
+
+    implementation 'com.github.bumptech.glide:annotations:4.11.0'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    //tv
+    implementation 'com.github.lygttpod:SuperTextView:2.4.2'
+    implementation 'com.github.zackratos.ultimatebar:ultimatebar3:3.1.1'
+
+
+}

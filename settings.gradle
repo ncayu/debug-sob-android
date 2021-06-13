@@ -1,0 +1,8 @@
+include ':lib_logo'
+include ':lib_common_widget'
+include ':lib_common_utils'
+include ':lib_log_format'
+include ':lib_sw'
+include ':app'
+rootProject.name = "sob-android"
+includeBuild 'plugin_version'

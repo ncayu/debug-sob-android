@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import
+            alias="appR"
+            type="com.android.debug.R" />
+
+        <variable
+            name="loop"
+            type="com.android.debug.model.bean.SobLoop" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sw_60dp"
+        android:background="?android:attr/selectableItemBackground">
+
+
+        <com.debug.widget.RadiusImageView
+            android:id="@+id/iv_loop_cover"
+            imagePlaceholder="@{appR.mipmap.ic_launcher}"
+            imageUrl="@{loop.imageUrl}"
+            android:layout_width="@dimen/sw_40dp"
+            android:layout_height="@dimen/sw_40dp"
+            android:layout_marginLeft="@dimen/sw_10dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_border_color="#ff0000"
+            app:riv_border_width="@dimen/sw_1dp"
+            app:riv_corner_radius="@dimen/sw_4dp"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_loop_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/sw_10dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{loop.title}"
+            android:textColor="#000810"
+            android:textSize="@dimen/sw_15sp"
+            app:layout_constraintLeft_toRightOf="@id/iv_loop_cover"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_loop_cover"
+            tools:text="我是轮播图的标题啊我是轮播图的标题我是轮播图的标题啊" />
+
+        <TextView
+            android:id="@+id/tv_loop_url"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/sw_10dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{loop.targetUrl}"
+            android:textColor="#454646"
+            android:textSize="@dimen/sw_12sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_loop_cover"
+            app:layout_constraintLeft_toRightOf="@id/iv_loop_cover"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="这是url" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
