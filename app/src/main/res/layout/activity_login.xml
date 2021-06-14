@@ -14,19 +14,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_30"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.20" />
+
         <TextView
             android:id="@+id/tv_login_title"
+            app:layout_constraintTop_toBottomOf="@id/gl_30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/sw_40dp"
-            android:layout_marginTop="@dimen/sw_70dp"
             android:text="密码登录"
             android:textColor="@color/color_202020"
             android:textSize="@dimen/sw_30sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent" />
 
-        <EditText
+        <com.debug.widget.edit.ClearableEditText
             android:id="@+id/et_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,7 +62,7 @@
             android:background="@color/color_ECECEC"
             app:layout_constraintTop_toBottomOf="@id/et_user" />
 
-        <EditText
+        <com.debug.widget.edit.ClearableEditText
             android:id="@+id/et_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,9 +89,9 @@
             app:layout_constraintTop_toBottomOf="@id/et_pwd" />
 
 
-        <EditText
+        <com.debug.widget.edit.ClearableEditText
             android:id="@+id/et_code"
-            android:layout_width="@dimen/sw_100dp"
+            android:layout_width="@dimen/sw_120dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/sw_40dp"
             android:layout_marginTop="@dimen/sw_20dp"
