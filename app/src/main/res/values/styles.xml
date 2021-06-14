@@ -13,4 +13,13 @@
         <item name="colorControlHighlight">#ECECEC</item>
     </style>
 
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorControlNormal">#ECECEC</item>
+        <item name="colorControlActivated">#ECECEC</item>
+        <item name="colorControlHighlight">#ECECEC</item>
+        <!-- enable window content transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
 </resources>

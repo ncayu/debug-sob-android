@@ -19,27 +19,23 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun getLayoutId() = R.layout.activity_login
 
+    override fun getVariableId() = BR.loginVm
+
     override fun initView() {
-        MobclickAgent.onEvent(this,"login-page")
+        MobclickAgent.onEvent(this, "login-page")
         shake = AnimationUtils.loadAnimation(this, R.anim.ani_shake)
-        //ImageHelper.load(vb.ivVerifyCode, getVerifyUrl())
         vb.btnLogin.singleClick {
             viewModel.login()
         }
-        //navActivity<JpBlogActivity>()
         vb.ivVerifyCode.singleClick {
             viewModel.getCaptchaCode()
         }
     }
 
-
     override fun initData(savedInstanceState: Bundle?) {
         viewModel.getCaptchaCode()
     }
 
-    override fun getVariableId(): Int {
-        return BR.loginVm
-    }
 
     override fun startObserve() {
         viewModel.liveDataCaptcha.observe(this, {

@@ -18,7 +18,7 @@
         app:autoPlay="false"
         app:gradientAnimDuration="2000"
         app:gradientColor="@color/colorAccent"
-        app:logoName="不忘初心，方得始终"
+        app:logoName="SOB，遇见她/他"
         app:offsetAnimDuration="1500"
         app:showGradient="true"
         app:textColor="#000814"
@@ -28,9 +28,12 @@
 
 
     <ImageView
+        android:id="@+id/iv_splash_logo"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:src="@mipmap/ic_launcher"
+        android:transitionName="@string/blue_name"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guide_45p" />

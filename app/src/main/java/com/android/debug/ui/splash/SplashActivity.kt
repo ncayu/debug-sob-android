@@ -2,12 +2,14 @@ package com.android.debug.ui.splash
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import com.android.debug.R
 import com.android.debug.databinding.ActivitySplashBinding
 import com.android.debug.ui.login.LoginActivity
 import com.github.zackratos.ultimatebar.UltimateBar
@@ -41,9 +43,19 @@ class SplashActivity : AppCompatActivity() {
             override fun onAnimationEnd(animation: Animator) {
                 Log.d("AnimLogoView", "Gradient anim end")
                 //启动main
-                val main = Intent(binding.animLogo.context, LoginActivity::class.java)
-                startActivity(main)
-                finish()
+                // val main = Intent(binding.animLogo.context, LoginActivity::class.java)
+                // startActivity(main)
+                // finish()
+                val i = Intent(this@SplashActivity, LoginActivity::class.java)
+                val sharedView = binding.ivSplashLogo
+                val transitionName = getString(R.string.blue_name);
+                val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
+                        this@SplashActivity,
+                        sharedView,
+                        transitionName
+                )
+                startActivity(i, transitionActivityOptions.toBundle())
+                binding.animLogo.postDelayed({ finish() }, 1300)
             }
         })
         binding.animLogo.startAnimation()
@@ -56,6 +68,7 @@ class SplashActivity : AppCompatActivity() {
                 .create()
                 .hideBar()
     }
+
     override fun onResume() {
         super.onResume()
         MobclickAgent.onResume(this)
