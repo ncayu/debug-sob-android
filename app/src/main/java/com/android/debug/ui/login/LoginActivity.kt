@@ -7,6 +7,8 @@ import com.android.debug.BR
 import com.android.debug.R
 import com.android.debug.core.base.BaseActivity
 import com.android.debug.databinding.ActivityLoginBinding
+import com.android.debug.datastore.AppConstant
+import com.android.debug.ui.main.MainActivity
 import com.android.lib.common.utils.singleClick
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -33,9 +35,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         }
         vb.btnLogin.postDelayed({
             XUpdate.newBuild(this)
-                .updateUrl("http://mp.moonlightshadow.cn/apk/sob_update.json?r=" + System.currentTimeMillis())
-                .update()
+                    .updateUrl(AppConstant.UPDATE_URL + System.currentTimeMillis())
+                    .update()
         }, 2000)
+        vb.btnSkip.singleClick {
+            navigateAndDestroy(MainActivity::class.java)
+        }
+        //直接进入main
+        navigateAndDestroy(MainActivity::class.java)
     }
 
     override fun initData(savedInstanceState: Bundle?) {
@@ -46,10 +53,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     override fun startObserve() {
         viewModel.liveDataCaptcha.observe(this, {
             Glide.with(this@LoginActivity)
-                .load(it)
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(vb.ivVerifyCode)
+                    .load(it)
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(vb.ivVerifyCode)
         })
         viewModel.shakeAnim.observe(this, {
             showAnimShake(it)

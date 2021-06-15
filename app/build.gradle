@@ -168,5 +168,6 @@ dependencies {
     implementation Deps.xUpdate
     implementation Deps.zhyOkhttp
 
+    implementation project(path: ':lib_flycoTabLayout')
 
 }

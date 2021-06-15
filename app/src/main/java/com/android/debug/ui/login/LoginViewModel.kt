@@ -8,7 +8,7 @@ import com.android.debug.core.base.BaseViewModel
 import com.android.debug.model.api.onFailure
 import com.android.debug.model.api.onSucceed
 import com.android.debug.model.bean.LoginBody
-import com.android.debug.ui.MainActivity
+import com.android.debug.ui.main.MainActivity
 import com.android.debug.utils.AppToast
 import com.android.lib.common.utils.AppMd5Utils
 import kotlinx.coroutines.launch
@@ -56,6 +56,7 @@ class LoginViewModel : BaseViewModel() {
                     }
                     .onFailure {
                         AppToast.toast(it)
+                        shakeAnim.postValue(3)
                         getCaptchaCode()
                     }
         }

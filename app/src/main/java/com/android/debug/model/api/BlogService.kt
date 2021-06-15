@@ -1,5 +1,6 @@
 package com.android.debug.model.api
 
+import com.android.debug.model.bean.HomeRecommend
 import com.android.debug.model.bean.LoginBody
 import com.android.debug.model.bean.SobLoop
 import com.android.debug.model.bean.SobUser
@@ -10,6 +11,8 @@ import retrofit2.http.Path
 
 
 interface BlogService {
+
+
 
     /**
      * 轮播图接口
@@ -26,5 +29,7 @@ interface BlogService {
             @Body user: LoginBody): BaseResponse<SobUser>
 
 
+    @GET("/ct/content/home/recommend/{page}")
+    suspend fun getHomeRecommend(@Path("page") page: Int): BaseResponse<HomeRecommend>
 
 }
