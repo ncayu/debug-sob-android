@@ -44,8 +44,7 @@ open class BaseViewModel : ViewModel() {
             if (showLoading) {
                 showLoading()
             }
-            requestSimple(request);
-
+            requestSimple(request)
         } catch (e: Exception) {
             LL.e(e)
             BaseResponse<T>().apply {

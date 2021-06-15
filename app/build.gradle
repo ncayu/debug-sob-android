@@ -167,7 +167,7 @@ dependencies {
     implementation Deps.ultimatebar3
     implementation Deps.xUpdate
     implementation Deps.zhyOkhttp
-
+    implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
     implementation project(path: ':lib_flycoTabLayout')
 
 }
