@@ -152,6 +152,10 @@ interface Deps {
     String okHttp3 = 'com.squareup.okhttp3:okhttp:4.9.0'
     //okHttp3LoggingInterceptor
     String okHttp3LoggingInterceptor = 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    //zhyOkhttp
+    String zhyOkhttp = 'com.zhy:okhttputils:2.6.2'
+    //xUpdate
+    String xUpdate = 'com.github.xuexiangjys:XUpdate:2.0.7'
 
     /*
      * retrofit2
@@ -186,6 +190,8 @@ interface Deps {
     String glideV4 = 'com.github.bumptech.glide:glide:4.11.0'
     //glideV4Compiler
     String glideV4Compiler = 'com.github.bumptech.glide:compiler:4.11.0'
+    //imageLoaderProxy
+    String imageLoaderProxy = 'com.github.ff-frida:frida-imageload-util:0.0.1'
 
     /*
      * 事件总线
@@ -251,6 +257,10 @@ interface Deps {
     String CircularReveal = 'com.github.ozodrukh:CircularReveal:2.1.0@aar'
     //FloatMenu : https://github.com/crosg/FloatMenuSample
     String FloatMenu = 'com.yw.game.floatmenu:FloatMenu:2.0.1'
+    //ultimatebar3
+    String ultimatebar3 = 'com.github.zackratos.ultimatebar:ultimatebar3:3.1.1'
+    //superTextView
+    String superTextView = 'com.github.lygttpod:SuperTextView:2.4.2'
 
     /*
      * 动画
@@ -381,6 +391,13 @@ interface Deps {
 
     //adapterCymChad
     String adapterCymChad = 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+
+    //umsdkCommon
+    String umsdkCommon = 'com.umeng.umsdk:common:9.4.0'
+    //umsdkAsms
+    String umsdkAsms = 'com.umeng.umsdk:asms:1.2.3'
+    //umengApm
+    String umengApm = 'com.umeng.umsdk:apm:1.2.0'
 
     //toastLib
     String toastLib = 'com.hjq:toast:8.8'

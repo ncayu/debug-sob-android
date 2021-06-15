@@ -196,6 +196,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     //okHttp3LoggingInterceptor
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    //zhyOkhttp
+    implementation 'com.zhy:okhttputils:2.6.2'
+    //xUpdate
+    implementation 'com.github.xuexiangjys:XUpdate:2.0.7'
 
     /*
      * retrofit2
@@ -230,6 +234,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     //glideV4Compiler
     implementation 'com.github.bumptech.glide:compiler:4.11.0'
+    //imageLoaderProxy
+    implementation 'com.github.ff-frida:frida-imageload-util:0.0.1'
 
     /*
      * 事件总线
@@ -295,6 +301,10 @@ dependencies {
     implementation 'com.github.ozodrukh:CircularReveal:2.1.0@aar'
     //FloatMenu : https://github.com/crosg/FloatMenuSample
     implementation 'com.yw.game.floatmenu:FloatMenu:2.0.1'
+    //ultimatebar3
+    implementation 'com.github.zackratos.ultimatebar:ultimatebar3:3.1.1'
+    //superTextView
+    implementation 'com.github.lygttpod:SuperTextView:2.4.2'
 
     /*
      * 动画
@@ -425,6 +435,13 @@ dependencies {
 
     //adapterCymChad
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+
+    //umsdkCommon
+    implementation 'com.umeng.umsdk:common:9.4.0'
+    //umsdkAsms
+    implementation 'com.umeng.umsdk:asms:1.2.3'
+    //umengApm
+    implementation 'com.umeng.umsdk:apm:1.2.0'
 
     //toastLib
     implementation 'com.hjq:toast:8.8'
