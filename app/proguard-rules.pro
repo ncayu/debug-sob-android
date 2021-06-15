@@ -47,3 +47,8 @@ public static final int *;
 }
 
 -keep class com.android.debug.model.bean.** {*;}
+-keep class com.xuexiang.xupdate.entity.** { *; }
+
+#// Note: if you use a custom API parser for parsing, you need to add confusion to your custom API entities. Here are the custom API entity obfuscation rules configured in this demo:
+-keep class com.xuexiang.xupdatedemo.entity.** { *; }
+

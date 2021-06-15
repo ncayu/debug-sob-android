@@ -11,6 +11,7 @@ import com.android.lib.common.utils.singleClick
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.umeng.analytics.MobclickAgent
+import com.xuexiang.xupdate.XUpdate
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
@@ -30,6 +31,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         vb.ivVerifyCode.singleClick {
             viewModel.getCaptchaCode()
         }
+        vb.btnLogin.postDelayed({
+            XUpdate.newBuild(this)
+                .updateUrl("http://mp.moonlightshadow.cn/apk/sob_update.json?r=" + System.currentTimeMillis())
+                .update()
+        }, 2000)
     }
 
     override fun initData(savedInstanceState: Bundle?) {
@@ -40,10 +46,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     override fun startObserve() {
         viewModel.liveDataCaptcha.observe(this, {
             Glide.with(this@LoginActivity)
-                    .load(it)
-                    .skipMemoryCache(true)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .into(vb.ivVerifyCode)
+                .load(it)
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(vb.ivVerifyCode)
         })
         viewModel.shakeAnim.observe(this, {
             showAnimShake(it)
