@@ -36,7 +36,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/sw_10dp"
-        android:text="名字"
+        tools:text="名字"
+        android:ellipsize="end"
         android:textColor="#878787"
         android:textSize="@dimen/sw_14sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
@@ -62,9 +63,9 @@
         android:id="@+id/tv_views"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="100阅读-20收藏"
+        tools:text="100阅读-20收藏"
         android:textColor="#CDCDCD"
-        android:layout_marginBottom="@dimen/sw_10dp"
+        android:layout_marginBottom="@dimen/sw_4dp"
         app:layout_constraintBottom_toBottomOf="@id/iv_cover"
         app:layout_constraintLeft_toLeftOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
