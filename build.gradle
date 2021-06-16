@@ -9,6 +9,7 @@ buildscript {
         maven { url 'https://jitpack.io' }
         maven { url 'https://dl.bintray.com/umsdk/release' }
         maven { url 'https://repo1.maven.org/maven2/' }
+        mavenCentral()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.1"
@@ -27,6 +28,7 @@ allprojects {
         maven { url 'https://jitpack.io' }
         maven { url 'https://dl.bintray.com/umsdk/release' }
         maven { url 'https://repo1.maven.org/maven2/' }
+        mavenCentral()
     }
     logger.error("project = $project,plugins = ${project.plugins}")
     //输出的 log 中没有 plugin.version

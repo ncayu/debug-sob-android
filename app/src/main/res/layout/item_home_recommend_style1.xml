@@ -15,7 +15,7 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="#1A1A1A"
-        android:textSize="@dimen/sw_17sp"
+        android:textSize="@dimen/sw_16sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

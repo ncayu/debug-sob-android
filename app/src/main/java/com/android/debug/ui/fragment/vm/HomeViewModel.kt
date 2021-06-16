@@ -1,12 +1,12 @@
 package com.android.debug.ui.fragment.vm
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.debug.core.base.BaseViewModel
 import com.android.debug.model.api.onFailure
 import com.android.debug.model.api.onSucceed
 import com.android.debug.model.bean.HomeRecommend
 import com.android.debug.utils.AppToast
+import com.kunminx.architecture.ui.callback.UnPeekLiveData
 import kotlinx.coroutines.launch
 
 /**
@@ -16,9 +16,9 @@ import kotlinx.coroutines.launch
  */
 class HomeViewModel : BaseViewModel() {
 
-    val articleList = MutableLiveData<HomeRecommend>()
+    val articleList = UnPeekLiveData<HomeRecommend>()
 
-    val requestState = MutableLiveData<Boolean>()
+    val requestState = UnPeekLiveData<Boolean>()
 
     /**
      * 首页推荐接口

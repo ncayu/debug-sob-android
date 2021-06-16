@@ -1,7 +1,6 @@
 package com.android.debug.ui.login
 
 import androidx.databinding.ObservableField
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.debug.BuildConfig
 import com.android.debug.core.base.BaseViewModel
@@ -11,6 +10,7 @@ import com.android.debug.model.bean.LoginBody
 import com.android.debug.ui.main.MainActivity
 import com.android.debug.utils.AppToast
 import com.android.lib.common.utils.AppMd5Utils
+import com.kunminx.architecture.ui.callback.UnPeekLiveData
 import kotlinx.coroutines.launch
 
 /**
@@ -20,13 +20,13 @@ import kotlinx.coroutines.launch
  */
 class LoginViewModel : BaseViewModel() {
 
-    val shakeAnim = MutableLiveData<Int>()
+    val shakeAnim = UnPeekLiveData<Int>()
 
     val userName = ObservableField<String>().apply { set("") }
     val password = ObservableField<String>().apply { set("") }
     val verifyCode = ObservableField<String>().apply { set("") }
 
-    val liveDataCaptcha = MutableLiveData<String>()
+    val liveDataCaptcha = UnPeekLiveData<String>()
 
     fun login() {
         if (userName.get()?.isEmpty() == true) {
