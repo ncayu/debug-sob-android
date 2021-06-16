@@ -22,4 +22,12 @@
         <!--图片是否可触摸选中，默认：true-->
         <attr name="riv_is_touch_select_mode_enabled" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="RatioImageView">
+        <attr name="ratio" format="float"/>
+    </declare-styleable>
+
+    <declare-styleable name="NineGridLayout">
+        <attr name="sapcing" format="dimension"/>
+    </declare-styleable>
 </resources>

@@ -1,5 +1,7 @@
 package com.android.debug.model.bean;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import java.util.List;
 
 public class HomeRecommend {
@@ -68,7 +70,9 @@ public class HomeRecommend {
         this.list = list;
     }
 
-    public static class RecommendArticle {
+    public static class RecommendArticle implements MultiItemEntity {
+        public static final int ITEM_STYLE_SINGLE = 0;
+        public static final int ITEM_STYLE_MULTI = 1;
         private String title;
         private String createTime;
         private int thumbUp;
@@ -80,6 +84,19 @@ public class HomeRecommend {
         private String userId;
         private boolean vip;
         private List<String> covers;
+        /**
+         * 1:多图片
+         * 0:单图片
+         */
+        private int rvItemType = 0;
+
+        public int getRvItemType() {
+            return rvItemType;
+        }
+
+        public void setRvItemType(int rvItemType) {
+            this.rvItemType = rvItemType;
+        }
 
         public String getTitle() {
             return title;
@@ -167,6 +184,11 @@ public class HomeRecommend {
 
         public void setCovers(List<String> covers) {
             this.covers = covers;
+        }
+
+        @Override
+        public int getItemType() {
+            return rvItemType;
         }
     }
 }

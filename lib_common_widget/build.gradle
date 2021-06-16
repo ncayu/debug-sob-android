@@ -29,9 +29,12 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation Deps.recyclerView
+    implementation project(path: ':lib_common_utils')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
+    implementation 'com.github.bumptech.glide:annotations:4.11.0'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }
