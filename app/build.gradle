@@ -29,8 +29,8 @@ android {
         applicationId Versions.applicationId
         minSdkVersion Versions.minSdk
         targetSdkVersion Versions.targetSdk
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -169,5 +169,11 @@ dependencies {
     implementation Deps.zhyOkhttp
     implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
     implementation project(path: ':lib_flycoTabLayout')
-
+    //刷新控件
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'
+    //核心必须依赖
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.1'
+    implementation  'com.scwang.smart:refresh-footer-classics:2.0.1'
+    //经典加载
 }

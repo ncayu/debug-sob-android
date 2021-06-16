@@ -13,10 +13,13 @@ import com.android.debug.databinding.LayoutHomeBinding
 import com.android.debug.ui.adapter.HomeRecommendAdapter
 import com.android.debug.ui.fragment.vm.HomeViewModel
 import com.hi.dhl.binding.viewbind
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 
 
-class HomeFragment : BaseFragment(R.layout.layout_home) {
+class HomeFragment : BaseFragment(R.layout.layout_home), OnRefreshListener, OnLoadMoreListener {
 
     private val recommendAdapter = HomeRecommendAdapter()
 
@@ -24,7 +27,13 @@ class HomeFragment : BaseFragment(R.layout.layout_home) {
 
     private val vm: HomeViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    private var mCurrentPage = 1
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return vb.root
     }
 
@@ -33,17 +42,51 @@ class HomeFragment : BaseFragment(R.layout.layout_home) {
             layoutManager = LinearLayoutManager(context)
             adapter = recommendAdapter
             addItemDecoration(
-                    HorizontalDividerItemDecoration.Builder(context)
-                            .color(Color.parseColor("#F6F6F6"))
-                            .sizeResId(R.dimen.sw_4dp)
-                            .build())
+                HorizontalDividerItemDecoration.Builder(context)
+                    .color(Color.parseColor("#F6F6F6"))
+                    .sizeResId(R.dimen.sw_6dp)
+                    .build()
+            )
         }
     }
 
     override fun initData() {
         vm.getRecommend(1)
+        //文章数据返回
         vm.articleList.observe(viewLifecycleOwner) {
-            recommendAdapter.setNewInstance(it.list)
+            mCurrentPage = it.currentPage
+
+            if (it.currentPage == 1) {
+                vb.slHomeLayout.finishRefresh()
+                recommendAdapter.setNewInstance(it.list)
+            } else {
+                if (it.isHasNext) {
+                    vb.slHomeLayout.finishLoadMore()
+                } else {
+                    vb.slHomeLayout.finishRefreshWithNoMoreData()
+                }
+                recommendAdapter.addData(it.list)
+            }
         }
+        //下拉，上拉监听
+        vb.slHomeLayout.setOnRefreshListener(this)
+        vb.slHomeLayout.setOnLoadMoreListener(this)
+
+        vm.requestState.observe(viewLifecycleOwner) {
+            if (it) {
+                vb.slHomeLayout.finishRefresh()
+            } else {
+                vb.slHomeLayout.finishLoadMore(false)
+            }
+        }
+    }
+
+    override fun onRefresh(refreshLayout: RefreshLayout) {
+        mCurrentPage = 1
+        vm.getRecommend(1)
+    }
+
+    override fun onLoadMore(refreshLayout: RefreshLayout) {
+        vm.getRecommend(mCurrentPage + 1)
     }
 }

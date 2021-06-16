@@ -18,6 +18,8 @@ class HomeViewModel : BaseViewModel() {
 
     val articleList = MutableLiveData<HomeRecommend>()
 
+    val requestState = MutableLiveData<Boolean>()
+
     /**
      * 首页推荐接口
      * @param page Int 页码最低1
@@ -25,10 +27,14 @@ class HomeViewModel : BaseViewModel() {
     fun getRecommend(page: Int) {
         viewModelScope.launch {
             request { getHomeRecommend(page) }
-                    .onSucceed {
-                        this?.apply { articleList.postValue(this) }
-                    }
-                    .onFailure { AppToast.toast(it) }
+                .onSucceed {
+                    this?.apply { articleList.postValue(this) }
+                }
+                .onFailure {
+                    //如果true，停止刷新，false，就显示加载更多错误
+                    requestState.postValue(page == 1)
+                    AppToast.toast(it)
+                }
         }
     }
 }
