@@ -8,10 +8,12 @@ import com.android.debug.BR
 import com.android.debug.R
 import com.android.debug.core.base.BaseActivity
 import com.android.debug.databinding.ActivityMain2Binding
+import com.android.debug.datastore.AppConstant
 import com.android.debug.model.bean.TabEntity
 import com.android.debug.ui.fragment.*
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
+import com.xuexiang.xupdate.XUpdate
 import java.util.*
 
 class MainActivity : BaseActivity<ActivityMain2Binding, MainViewModel>() {
@@ -21,11 +23,13 @@ class MainActivity : BaseActivity<ActivityMain2Binding, MainViewModel>() {
     private val mTitles = arrayOf("特惠", "沸点", "发现", "小册", "我的")
 
     private val mIconUnselectIds = intArrayOf(
-            R.mipmap.tab_home_normal, R.mipmap.tab_activity,
-            R.mipmap.tab_find_normal, R.mipmap.tab_xiaoce_normal, R.mipmap.tab_profile_normal)
+        R.mipmap.tab_home_normal, R.mipmap.tab_activity,
+        R.mipmap.tab_find_normal, R.mipmap.tab_xiaoce_normal, R.mipmap.tab_profile_normal
+    )
     private val mIconSelectIds = intArrayOf(
-            R.mipmap.tab_home, R.mipmap.tab_activity_press,
-            R.mipmap.tab_find, R.mipmap.tab_xiaoce, R.mipmap.tab_profile)
+        R.mipmap.tab_home, R.mipmap.tab_activity_press,
+        R.mipmap.tab_find, R.mipmap.tab_xiaoce, R.mipmap.tab_profile
+    )
 
 
     override fun getLayoutId() = R.layout.activity_main2
@@ -37,6 +41,9 @@ class MainActivity : BaseActivity<ActivityMain2Binding, MainViewModel>() {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+        XUpdate.newBuild(this)
+            .updateUrl(AppConstant.UPDATE_URL + System.currentTimeMillis())
+            .update()
         initTab()
     }
 
@@ -69,7 +76,11 @@ class MainActivity : BaseActivity<ActivityMain2Binding, MainViewModel>() {
         })
     }
 
-    class MyPagerAdapter(fm: FragmentManager?, fragmentList: ArrayList<Fragment>, arr: Array<String>) : FragmentPagerAdapter(fm!!) {
+    class MyPagerAdapter(
+        fm: FragmentManager?,
+        fragmentList: ArrayList<Fragment>,
+        arr: Array<String>
+    ) : FragmentPagerAdapter(fm!!) {
         private var f: ArrayList<Fragment> = fragmentList
         private var arrTitle: Array<String> = arr
 
