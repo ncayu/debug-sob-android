@@ -12,7 +12,7 @@
         android:layout_marginLeft="@dimen/sw_10dp"
         android:layout_marginTop="@dimen/sw_10dp"
         android:src="@mipmap/ic_launcher"
-        app:civ_border_color="@color/color_FB88C4"
+        app:civ_border_color="@color/color_313437"
         app:civ_border_width="@dimen/sw_2dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,6 +40,7 @@
         android:layout_marginRight="@dimen/sw_10dp"
         android:ellipsize="end"
         android:singleLine="true"
+        android:textColor="@color/color_ABB0B9"
         android:textSize="@dimen/sw_12sp"
         app:layout_constraintLeft_toRightOf="@id/iv_moment_avatar"
         app:layout_constraintRight_toRightOf="parent"
@@ -50,8 +51,9 @@
         android:id="@+id/tv_moment_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/sw_4dp"
+        android:layout_marginTop="@dimen/sw_8dp"
         android:layout_marginRight="@dimen/sw_10dp"
+        android:textColor="@color/color_2E3135"
         android:textSize="@dimen/sw_13sp"
         app:layout_constraintLeft_toLeftOf="@id/tv_moment_company"
         app:layout_constraintRight_toRightOf="parent"
@@ -62,8 +64,9 @@
         android:id="@+id/ng_moment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/sw_4dp"
+        android:layout_marginTop="@dimen/sw_14dp"
         android:layout_marginRight="@dimen/sw_10dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_moment_topicName"
         app:layout_constraintLeft_toLeftOf="@id/tv_moment_company"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_moment_content" />
@@ -78,7 +81,7 @@
         android:paddingTop="@dimen/sw_3dp"
         android:paddingRight="@dimen/sw_6dp"
         android:paddingBottom="@dimen/sw_3dp"
-        android:textColor="@color/color_0084FF"
+        android:textColor="@color/color_1A8BFF"
         android:textSize="@dimen/sw_13sp"
         app:layout_constraintLeft_toLeftOf="@+id/tv_moment_company"
         app:layout_constraintTop_toBottomOf="@id/ng_moment"
@@ -92,30 +95,72 @@
         android:background="#f2f2f2"
         app:layout_constraintTop_toBottomOf="@id/tv_moment_topicName" />
 
-    <TextView
-        android:id="@+id/tv_moment_comment"
+    <FrameLayout
+        android:id="@+id/fl_moment_comment"
         android:layout_width="0dp"
         android:layout_height="@dimen/sw_40dp"
         android:gravity="center"
-        android:text="评论"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/fl_like"
+        app:layout_constraintTop_toBottomOf="@id/line_top">
 
-        app:layout_constraintRight_toLeftOf="@+id/tv_moment_like"
-        app:layout_constraintTop_toBottomOf="@id/line_top" />
+        <LinearLayout
+            android:id="@+id/ll_moment_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="@dimen/sw_26dp"
+                android:layout_height="@dimen/sw_26dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_moment_comment" />
 
-    <TextView
-        android:id="@+id/tv_moment_like"
+            <TextView
+                android:id="@+id/tv_moment_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/sw_2dp"
+                android:textColor="@color/color_869AAB"
+                android:textSize="@dimen/sw_12sp"
+                tools:text="5" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_like"
         android:layout_width="0dp"
         android:layout_height="@dimen/sw_40dp"
-        android:gravity="center"
-        android:text="点赞"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintLeft_toRightOf="@+id/tv_moment_comment"
+        app:layout_constraintLeft_toRightOf="@+id/fl_moment_comment"
         app:layout_constraintRight_toLeftOf="@+id/tv_moment_share"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line_top" />
+        app:layout_constraintTop_toBottomOf="@id/line_top">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/sw_20dp"
+                android:layout_height="@dimen/sw_20dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/icon_zan_grey_feidian3" />
+
+            <TextView
+                android:id="@+id/tv_moment_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_869AAB"
+                android:textSize="@dimen/sw_12sp"
+                android:layout_marginLeft="@dimen/sw_2dp"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+    </FrameLayout>
 
     <TextView
         android:id="@+id/tv_moment_share"
@@ -123,8 +168,9 @@
         android:layout_height="@dimen/sw_40dp"
         android:gravity="center"
         android:text="分享"
+        android:textSize="@dimen/sw_12sp"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintLeft_toRightOf="@+id/tv_moment_like"
+        app:layout_constraintLeft_toRightOf="@+id/fl_like"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/line_top" />
 

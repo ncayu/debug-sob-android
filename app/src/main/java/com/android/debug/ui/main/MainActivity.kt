@@ -20,7 +20,7 @@ class MainActivity : BaseActivity<ActivityMain2Binding, MainViewModel>() {
 
     private val mTabEntities = ArrayList<CustomTabEntity>()
     private val mFragments = ArrayList<Fragment>()
-    private val mTitles = arrayOf("特惠", "摸鱼", "发现", "小册", "我的")
+    private val mTitles = arrayOf("首页", "摸鱼", "发现", "小册", "我的")
 
     private val mIconUnselectIds = intArrayOf(
         R.mipmap.tab_home_normal, R.mipmap.tab_activity,
@@ -50,8 +50,8 @@ class MainActivity : BaseActivity<ActivityMain2Binding, MainViewModel>() {
     private fun initTab() {
         //全部fragment丢进去
         mFragments.clear()
-        mFragments.add(HomeFragment())
         mFragments.add(MomentFragment())
+        mFragments.add(HomeFragment())
         mFragments.add(FindFragment())
         mFragments.add(XiaoceFragment())
         mFragments.add(ProfileFragment())
