@@ -50,8 +50,8 @@ class MainActivity : BaseActivity<ActivityMain2Binding, MainViewModel>() {
     private fun initTab() {
         //全部fragment丢进去
         mFragments.clear()
-        mFragments.add(MomentFragment())
         mFragments.add(HomeFragment())
+        mFragments.add(MomentFragment())
         mFragments.add(FindFragment())
         mFragments.add(XiaoceFragment())
         mFragments.add(ProfileFragment())
