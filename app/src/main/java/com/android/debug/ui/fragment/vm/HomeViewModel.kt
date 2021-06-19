@@ -30,23 +30,24 @@ class HomeViewModel : BaseViewModel() {
     private fun getRecommendFlow(page: Int): Flow<HomeRecommend> {
         return flow {
             request { getHomeRecommend(page) }
-                .onSucceed {
-                    this?.let { recommend ->
-                        recommend.list.forEach {
-                            if (it.avatar != null && it.covers.size > 1) {
-                                it.rvItemType = HomeRecommend.RecommendArticle.ITEM_STYLE_MULTI
-                            } else {
-                                it.rvItemType = HomeRecommend.RecommendArticle.ITEM_STYLE_SINGLE
-                            }
+                    .onSucceed {
+                        this?.let { recommend ->
+                            //修改样式后，这里不需要区分单图还是多图，直接使用单图即可
+                            // recommend.list.forEach {
+                            //     if (it.avatar != null && it.covers.size > 1) {
+                            //         it.rvItemType = HomeRecommend.RecommendArticle.ITEM_STYLE_MULTI
+                            //     } else {
+                            //         it.rvItemType = HomeRecommend.RecommendArticle.ITEM_STYLE_SINGLE
+                            //     }
+                            // }
+                            emit(this)
                         }
-                        emit(this)
                     }
-                }
-                .onFailure {
-                    //如果true，停止刷新，false，就显示加载更多错误
-                    requestState.postValue(page == 1)
-                    AppToast.toast(it)
-                }
+                    .onFailure {
+                        //如果true，停止刷新，false，就显示加载更多错误
+                        requestState.postValue(page == 1)
+                        AppToast.toast(it)
+                    }
         }
     }
 
@@ -57,14 +58,14 @@ class HomeViewModel : BaseViewModel() {
     fun getRecommend(page: Int) {
         viewModelScope.launch {
             getRecommendFlow(page)
-                .catch {
-                    //如果true，停止刷新，false，就显示加载更多错误
-                    requestState.postValue(page == 1)
-                    AppToast.toast(this.toString())
-                }
-                .collect {
-                    articleList.postValue(it)
-                }
+                    .catch {
+                        //如果true，停止刷新，false，就显示加载更多错误
+                        requestState.postValue(page == 1)
+                        AppToast.toast(this.toString())
+                    }
+                    .collect {
+                        articleList.postValue(it)
+                    }
         }
     }
 
