@@ -3,9 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="wrap_content"
-        android:text="@string/me"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="sob博客App在开发中" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="目前有功能" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sw_10sp"
+        android:text="1,推荐模块=网站首页推荐" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sw_10sp"
+        android:text="2,摸鱼=网站首页推荐" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sw_10sp"
+        android:text="3,app内置更新" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sw_10sp"
+        android:text="4,其他彩蛋慢慢发现吧" />
 </LinearLayout>
