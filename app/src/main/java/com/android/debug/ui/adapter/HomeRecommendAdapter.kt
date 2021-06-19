@@ -9,19 +9,20 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.debug.widget.rv.NineGridTestLayout
 
-class HomeRecommendAdapter :
-    BaseMultiItemQuickAdapter<HomeRecommend.RecommendArticle, BaseViewHolder>() {
+class HomeRecommendAdapter() :
+        BaseMultiItemQuickAdapter<HomeRecommend.RecommendArticle, BaseViewHolder>() {
+
+
     init {
         addItemType(
-            HomeRecommend.RecommendArticle.ITEM_STYLE_SINGLE,
-            R.layout.item_home_recommend_style1
+                HomeRecommend.RecommendArticle.ITEM_STYLE_SINGLE,
+                R.layout.item_home_recommend_style1
         )
         addItemType(
-            HomeRecommend.RecommendArticle.ITEM_STYLE_MULTI,
-            R.layout.item_home_recommend_style2
+                HomeRecommend.RecommendArticle.ITEM_STYLE_MULTI,
+                R.layout.item_home_recommend_style2
         )
     }
-
 
     override fun convert(holder: BaseViewHolder, item: HomeRecommend.RecommendArticle) {
         when (holder.itemViewType) {
@@ -43,9 +44,9 @@ class HomeRecommendAdapter :
                 //封面,没有占位图，临时先用icon
                 if (item.covers != null && !item.covers.isEmpty()) {
                     ImageHelper.load(
-                        holder.getView(R.id.iv_cover),
-                        item.covers[0],
-                        R.mipmap.ic_launcher
+                            holder.getView(R.id.iv_cover),
+                            item.covers[0],
+                            R.mipmap.ic_launcher
                     )
                 } else {
                     holder.setBackgroundResource(R.id.iv_cover, R.mipmap.ic_launcher)
@@ -53,8 +54,8 @@ class HomeRecommendAdapter :
                 //阅读与收藏
                 val str = "%s阅读 - %s收藏"
                 holder.setText(
-                    R.id.tv_views,
-                    String.format(str, item.viewCount.toString(), item.thumbUp.toString())
+                        R.id.tv_views,
+                        String.format(str, item.viewCount.toString(), item.thumbUp.toString())
                 )
             }
             HomeRecommend.RecommendArticle.ITEM_STYLE_MULTI -> {
@@ -75,8 +76,8 @@ class HomeRecommendAdapter :
                 //阅读与收藏
                 val str = "%s阅读 - %s收藏"
                 holder.setText(
-                    R.id.tv_views,
-                    String.format(str, item.viewCount.toString(), item.thumbUp.toString())
+                        R.id.tv_views,
+                        String.format(str, item.viewCount.toString(), item.thumbUp.toString())
                 )
                 //九宫格
                 val nineView = holder.getView<NineGridTestLayout>(R.id.ng_cover)

@@ -2,6 +2,8 @@ package com.android.debug.ui.adapter
 
 import android.graphics.Color
 import android.text.TextUtils
+import android.widget.ImageView
+import ch.ielse.view.imagewatcher.ImageWatcher
 import com.allen.library.CircleImageView
 import com.android.debug.R
 import com.android.debug.model.bean.SobMoment.MomentBean
@@ -16,6 +18,12 @@ import com.debug.widget.nine.NineImageAdapter
 class MomentAdapter : BaseQuickAdapter<MomentBean, BaseViewHolder>(R.layout.item_moment_layout) {
     private val mRequestOptions: RequestOptions = RequestOptions().centerCrop()
     private val mDrawableTransitionOptions: DrawableTransitionOptions = DrawableTransitionOptions.withCrossFade()
+    private var mImageWatcher: ImageWatcher? = null
+
+
+    fun setImageWatcher(imageWatcher: ImageWatcher) {
+        this.mImageWatcher = imageWatcher
+    }
 
 
     override fun convert(baseViewHolder: BaseViewHolder, item: MomentBean) {
@@ -46,7 +54,13 @@ class MomentAdapter : BaseQuickAdapter<MomentBean, BaseViewHolder>(R.layout.item
         //             .setAdapter(NineImageAdapter(context, mRequestOptions, mDrawableTransitionOptions, item.images))
         // }
         baseViewHolder.getView<NineGridView>(R.id.ng_moment)
-                .setAdapter(NineImageAdapter(context, mRequestOptions, mDrawableTransitionOptions, item.images))
+                .apply {
+                    setAdapter(NineImageAdapter(context, mRequestOptions, mDrawableTransitionOptions, item.images))
+                    //大图片查看
+                    setOnImageClickListener { _, view ->
+                        mImageWatcher?.show(view as ImageView, imageViews, item.images)
+                    }
+                }
         //标签
         baseViewHolder.setText(R.id.tv_moment_topicName, item.topicName)
         baseViewHolder.setVisible(R.id.tv_moment_topicName, !TextUtils.isEmpty(item.topicName))
@@ -55,6 +69,5 @@ class MomentAdapter : BaseQuickAdapter<MomentBean, BaseViewHolder>(R.layout.item
         //点赞
         baseViewHolder.setText(R.id.tv_moment_like, item.thumbUpCount.toString())
         //分享
-
     }
 }

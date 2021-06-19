@@ -176,6 +176,8 @@ dependencies {
     implementation 'com.scwang.smart:refresh-footer-classics:2.0.1'
     //防止数据倒流
     implementation 'com.kunminx.arch:unpeek-livedata:5.0.1-beta1'
+    //图片查看
+    implementation 'ch.ielse:imagewatcher:1.0.3'
 
 
 }

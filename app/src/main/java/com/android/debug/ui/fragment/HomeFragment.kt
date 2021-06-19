@@ -1,17 +1,23 @@
 package com.android.debug.ui.fragment
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import ch.ielse.view.imagewatcher.ImageWatcher
 import com.android.debug.R
 import com.android.debug.core.base.BaseFragment
 import com.android.debug.databinding.LayoutHomeBinding
 import com.android.debug.ui.adapter.HomeRecommendAdapter
 import com.android.debug.ui.fragment.vm.HomeViewModel
+import com.android.debug.utils.GlideSimpleTarget
+import com.bumptech.glide.Glide
+import com.debug.widget.nine.Utils
 import com.hi.dhl.binding.viewbind
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener
@@ -19,21 +25,22 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 
 
-class HomeFragment : BaseFragment(R.layout.layout_home), OnRefreshListener, OnLoadMoreListener {
-
-    private val recommendAdapter = HomeRecommendAdapter()
+class HomeFragment : BaseFragment(R.layout.layout_home), OnRefreshListener, OnLoadMoreListener,
+        ImageWatcher.OnPictureLongPressListener, ImageWatcher.Loader {
 
     private val vb: LayoutHomeBinding by viewbind()
+
+    private val recommendAdapter = HomeRecommendAdapter()
 
     private val vm: HomeViewModel by viewModels()
 
     private var mCurrentPage = 1
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View {
         return vb.root
     }
 
@@ -42,11 +49,17 @@ class HomeFragment : BaseFragment(R.layout.layout_home), OnRefreshListener, OnLo
             layoutManager = LinearLayoutManager(context)
             adapter = recommendAdapter
             addItemDecoration(
-                HorizontalDividerItemDecoration.Builder(context)
-                    .color(Color.parseColor("#F6F6F6"))
-                    .sizeResId(R.dimen.sw_6dp)
-                    .build()
+                    HorizontalDividerItemDecoration.Builder(context)
+                            .color(Color.parseColor("#F6F6F6"))
+                            .sizeResId(R.dimen.sw_6dp)
+                            .build()
             )
+        }
+        vb.imageWatcher.apply {
+            setTranslucentStatus(Utils.calcStatusBarHeight(context))
+            setErrorImageRes(R.mipmap.error_picture)
+            setOnPictureLongPressListener(this@HomeFragment)
+            setLoader(this@HomeFragment)
         }
     }
 
@@ -89,4 +102,15 @@ class HomeFragment : BaseFragment(R.layout.layout_home), OnRefreshListener, OnLo
     override fun onLoadMore(refreshLayout: RefreshLayout) {
         vm.getRecommend(mCurrentPage + 1)
     }
+
+    override fun onPictureLongPress(v: ImageView?, url: String?, pos: Int) {
+    }
+
+    override fun load(context: Context?, url: String?, lc: ImageWatcher.LoadCallback?) {
+        context?.apply {
+            Glide.with(this).asBitmap().load(url).into(GlideSimpleTarget(lc))
+        }
+    }
+
+
 }

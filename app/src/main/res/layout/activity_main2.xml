@@ -11,33 +11,44 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.debug.widget.NoScrollViewPager
-            android:id="@+id/viewPage"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/sw_48dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:layout_height="match_parent">
 
-        <com.flyco.tablayout.CommonTabLayout
-            android:id="@+id/tl_main"
+            <com.debug.widget.NoScrollViewPager
+                android:id="@+id/viewPage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/sw_48dp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <com.flyco.tablayout.CommonTabLayout
+                android:id="@+id/tl_main"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sw_48dp"
+                android:background="#ffffff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tl_iconHeight="23dp"
+                app:tl_iconWidth="23dp"
+                app:tl_indicator_color="#0079FE"
+                app:tl_indicator_height="0dp"
+                app:tl_textSelectColor="#0079FE"
+                app:tl_textUnselectColor="#A1A1A1"
+                app:tl_textsize="12sp"
+                app:tl_underline_color="#DDDDDD" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ch.ielse.view.imagewatcher.ImageWatcher
+            android:id="@+id/image_watcher"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/sw_48dp"
-            android:background="#ffffff"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:tl_iconHeight="23dp"
-            app:tl_iconWidth="23dp"
-            app:tl_indicator_color="#0079FE"
-            app:tl_indicator_height="0dp"
-            app:tl_textSelectColor="#0079FE"
-            app:tl_textUnselectColor="#A1A1A1"
-            app:tl_textsize="12sp"
-            app:tl_underline_color="#DDDDDD" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent" />
+    </FrameLayout>
 
 
 </layout>
