@@ -7,65 +7,66 @@
     android:paddingLeft="@dimen/sw_12dp"
     android:paddingRight="@dimen/sw_12dp">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/sw_14dp"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:textColor="#1A1A1A"
-        android:textSize="@dimen/sw_16sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="这是一篇文章的title，哈哈，这是啥这是啥这是啥，测试中，你好啊。在吗。我是debug" />
 
     <com.allen.library.CircleImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="@dimen/sw_22dp"
-        android:layout_height="@dimen/sw_22dp"
+        android:layout_width="@dimen/sw_40dp"
+        android:layout_height="@dimen/sw_40dp"
         android:layout_marginTop="@dimen/sw_10dp"
         android:src="@drawable/ic_launcher_update"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginTop="@dimen/sw_10dp" />
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/sw_10dp"
-        tools:text="名字"
         android:ellipsize="end"
-        android:textColor="#878787"
+        android:textColor="@color/color_2E3135"
         android:textSize="@dimen/sw_14sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
         app:layout_constraintLeft_toRightOf="@id/iv_avatar"
-        app:layout_constraintRight_toLeftOf="@id/iv_cover"
-        app:layout_constraintTop_toTopOf="@id/iv_avatar" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_avatar"
+        tools:text="名字" />
 
-    <com.debug.widget.RadiusImageView
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sw_2dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/color_ABB0B9"
+        android:textSize="@dimen/sw_12sp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_avatar"
+        tools:text="这是一篇文章的title，哈哈，这是啥这是啥这是啥，测试中，你好啊。在吗。我是debug" />
+
+
+    <com.debug.widget.nine.NineGridView
         android:id="@+id/iv_cover"
-        app:riv_corner_radius="6dp"
-        app:riv_border_width="1px"
-        app:riv_border_color="@color/color_ECECEC"
-        android:layout_width="@dimen/sw_90dp"
-        android:layout_height="@dimen/sw_60dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/sw_70dp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_name"
         android:layout_marginTop="@dimen/sw_10dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="@dimen/sw_10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        tools:src="@drawable/ic_launcher_background" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
     <TextView
         android:id="@+id/tv_views"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="100阅读-20收藏"
-        android:textColor="#CDCDCD"
-        android:layout_marginBottom="@dimen/sw_4dp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_cover"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:layout_marginTop="@dimen/sw_8dp"
+        android:layout_marginBottom="@dimen/sw_8dp"
+        android:textColor="@color/color_ABB0B9"
+        android:textSize="@dimen/sw_10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@id/iv_cover"
+        tools:text="100阅读-20收藏" />
 </androidx.constraintlayout.widget.ConstraintLayout>

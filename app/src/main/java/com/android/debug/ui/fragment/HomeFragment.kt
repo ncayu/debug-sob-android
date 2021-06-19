@@ -15,6 +15,7 @@ import com.android.debug.core.base.BaseFragment
 import com.android.debug.databinding.LayoutHomeBinding
 import com.android.debug.ui.adapter.HomeRecommendAdapter
 import com.android.debug.ui.fragment.vm.HomeViewModel
+import com.android.debug.ui.main.MainActivity
 import com.android.debug.utils.GlideSimpleTarget
 import com.bumptech.glide.Glide
 import com.debug.widget.nine.Utils
@@ -51,7 +52,7 @@ class HomeFragment : BaseFragment(R.layout.layout_home), OnRefreshListener, OnLo
             addItemDecoration(
                     HorizontalDividerItemDecoration.Builder(context)
                             .color(Color.parseColor("#F6F6F6"))
-                            .sizeResId(R.dimen.sw_6dp)
+                            .sizeResId(R.dimen.sw_10dp)
                             .build()
             )
         }
@@ -61,6 +62,9 @@ class HomeFragment : BaseFragment(R.layout.layout_home), OnRefreshListener, OnLo
             setOnPictureLongPressListener(this@HomeFragment)
             setLoader(this@HomeFragment)
         }
+
+        recommendAdapter.setImageWatcher((context as MainActivity).getImageWatcher())
+
     }
 
     override fun initData() {
