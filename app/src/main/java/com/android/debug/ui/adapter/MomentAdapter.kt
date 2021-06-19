@@ -1,13 +1,13 @@
 package com.android.debug.ui.adapter
 
 import android.graphics.Color
-import android.text.TextUtils
 import android.widget.ImageView
 import ch.ielse.view.imagewatcher.ImageWatcher
 import com.allen.library.CircleImageView
 import com.android.debug.R
 import com.android.debug.model.bean.SobMoment.MomentBean
 import com.android.debug.utils.ImageHelper
+import com.android.lib.common.utils.AppDateUtils
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -62,8 +62,10 @@ class MomentAdapter : BaseQuickAdapter<MomentBean, BaseViewHolder>(R.layout.item
                     }
                 }
         //标签
-        baseViewHolder.setText(R.id.tv_moment_topicName, item.topicName)
-        baseViewHolder.setVisible(R.id.tv_moment_topicName, !TextUtils.isEmpty(item.topicName))
+        baseViewHolder.setText(R.id.tv_moment_topicName, item.topicName ?: "随笔")
+        // baseViewHolder.setVisible(R.id.tv_moment_topicName, item.topicName?.isNotEmpty() ?: false)
+        //时间
+        baseViewHolder.setText(R.id.tv_day, AppDateUtils.getExactDate(AppDateUtils.parseLong4(item.createTime)))
         //评论
         baseViewHolder.setText(R.id.tv_moment_comment, item.commentCount.toString())
         //点赞

@@ -43,7 +43,7 @@
         android:textColor="@color/color_ABB0B9"
         android:textSize="@dimen/sw_12sp"
         app:layout_constraintLeft_toRightOf="@id/iv_moment_avatar"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_day"
         app:layout_constraintTop_toBottomOf="@id/tv_moment_name"
         tools:text="Google高级CV工程师-腾讯头条震惊部部长首席摸鱼大师是也" />
 
@@ -66,10 +66,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/sw_14dp"
         android:layout_marginRight="@dimen/sw_10dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/tv_moment_topicName"
         app:layout_constraintLeft_toLeftOf="@id/tv_moment_company"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_moment_content" />
+        app:layout_constraintTop_toBottomOf="@id/tv_moment_content"
+        tools:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_moment_topicName"
@@ -87,11 +89,21 @@
         app:layout_constraintTop_toBottomOf="@id/ng_moment"
         tools:text="日常摸鱼" />
 
+    <TextView
+        android:id="@+id/tv_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/sw_10dp"
+        android:textColor="@color/color_ABB0B9"
+        android:textSize="@dimen/sw_10sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_moment_company"
+        app:layout_constraintRight_toRightOf="parent" />
+
     <View
         android:id="@+id/line_top"
         android:layout_width="match_parent"
         android:layout_height="2px"
-        android:layout_marginTop="@dimen/sw_6dp"
+        android:layout_marginTop="@dimen/sw_14dp"
         android:background="#f2f2f2"
         app:layout_constraintTop_toBottomOf="@id/tv_moment_topicName" />
 
@@ -155,10 +167,10 @@
                 android:id="@+id/tv_moment_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_869AAB"
-                android:textSize="@dimen/sw_12sp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/sw_2dp"
-                android:layout_gravity="center_vertical" />
+                android:textColor="@color/color_869AAB"
+                android:textSize="@dimen/sw_12sp" />
         </LinearLayout>
     </FrameLayout>
 
