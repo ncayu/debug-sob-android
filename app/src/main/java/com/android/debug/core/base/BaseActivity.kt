@@ -2,6 +2,8 @@ package com.android.debug.core.base
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -34,10 +36,10 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : BaseViewModel> : AppComp
                 dismissLoading()
             }
         }
-        viewModel.pageNavigationEvent.observe(this,{
+        viewModel.pageNavigationEvent.observe(this, {
             navigateTo(it)
         })
-        viewModel.destroyYourselfAndNavigation.observe(this,{
+        viewModel.destroyYourselfAndNavigation.observe(this, {
             navigateAndDestroy(it)
         })
     }
@@ -99,4 +101,25 @@ abstract class BaseActivity<VDB : ViewDataBinding, VM : BaseViewModel> : AppComp
         startActivity(Intent(this, page as Class<*>))
         finish()
     }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (newConfig.fontScale != 1f) {
+            //fontScale不为1，需要强制设置为1
+            resources
+        }
+    }
+
+    override fun getResources(): Resources? {
+        val resources = super.getResources()
+        if (resources.configuration.fontScale != 1f) {
+            //fontScale不为1，需要强制设置为1
+            val newConfig = Configuration()
+            newConfig.setToDefaults()
+            //设置成默认值，即fontScale为1
+            resources.updateConfiguration(newConfig, resources.displayMetrics)
+        }
+        return resources
+    }
+
 }
