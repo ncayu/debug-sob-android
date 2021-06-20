@@ -62,7 +62,7 @@ class DebugApplication : Application() {
     private fun initAppUpdate() {
         XUpdate.get()
             .debug(BuildConfig.DEBUG)
-            .isWifiOnly(true) // By default, only version updates are checked under WiFi
+            .isWifiOnly(false) // By default, only version updates are checked under WiFi
             .isGet(true) // The default setting uses Get request to check versions
             .isAutoMode(false) // The default setting is non automatic mode
             .param(
