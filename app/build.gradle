@@ -118,7 +118,7 @@ dependencies {
     implementation project(path: ':lib_common_utils')
     //as 新建act的时候，都自动增加的依赖，暂时留着
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     //先临时放这里，方便调试
@@ -141,13 +141,13 @@ dependencies {
     implementation 'org.koin:koin-androidx-viewmodel:2.2.1'
 
     //协程
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
 
     //live data
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-beta01'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     // 必选
     implementation Deps.umsdkCommon
     // 必选
@@ -169,7 +169,6 @@ dependencies {
     implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
     implementation project(path: ':lib_flycoTabLayout')
     //刷新控件
-    implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'
     //核心必须依赖
     implementation 'com.scwang.smart:refresh-header-classics:2.0.1'

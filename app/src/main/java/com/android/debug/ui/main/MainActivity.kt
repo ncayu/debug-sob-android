@@ -22,6 +22,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener
 import com.xuexiang.xupdate.XUpdate
 import java.util.*
 
+
 class MainActivity : BaseActivity<ActivityMain2Binding, MainViewModel>(),
         ImageWatcher.OnPictureLongPressListener, ImageWatcher.Loader {
 
