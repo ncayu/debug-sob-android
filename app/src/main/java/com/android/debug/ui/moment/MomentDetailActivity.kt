@@ -99,7 +99,10 @@ class MomentDetailActivity : BaseActivity<ActivityMomentDetailBinding, MomentDet
                     }
                 }
         //摸鱼标签
-        detail.findViewById<TextView>(R.id.tv_moment_topicName).text = it.topicName ?: "随笔"
+        detail.findViewById<TextView>(R.id.tv_moment_topicName).apply {
+            text = it.topicName ?: "随笔"
+            visibility = View.VISIBLE
+        }
         //摸鱼时间
         detail.findViewById<TextView>(R.id.tv_day)
                 .text = AppDateUtils.getExactDate(AppDateUtils.parseLong4(it.createTime))

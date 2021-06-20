@@ -11,7 +11,7 @@
         android:layout_height="@dimen/sw_44dp"
         android:layout_marginLeft="@dimen/sw_10dp"
         android:layout_marginTop="@dimen/sw_10dp"
-        android:src="@mipmap/ic_launcher"
+        tools:src="@mipmap/ic_launcher"
         app:civ_border_color="@color/color_white"
         app:civ_border_width="@dimen/sw_2dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -74,6 +74,7 @@
         tools:visibility="gone" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tv_moment_topicName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
