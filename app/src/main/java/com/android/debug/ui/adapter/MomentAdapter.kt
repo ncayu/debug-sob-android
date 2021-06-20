@@ -28,6 +28,8 @@ class MomentAdapter : BaseQuickAdapter<MomentBean, BaseViewHolder>(R.layout.item
 
     override fun convert(baseViewHolder: BaseViewHolder, item: MomentBean) {
         //显示头像
+        baseViewHolder.setVisible(R.id.divider_line, false)
+
         //头像
         val ivAvatar = baseViewHolder.getView(R.id.iv_moment_avatar) as CircleImageView
         if (item.isVip) {
