@@ -46,13 +46,6 @@ class MomentAdapter : BaseQuickAdapter<MomentBean, BaseViewHolder>(R.layout.item
         //内容
         baseViewHolder.setText(R.id.tv_moment_content, item.content)
         //图片
-        // if (item.images == null || item.images.isEmpty()) {
-        //     baseViewHolder.setVisible(R.id.ng_moment, false)
-        // } else {
-        //     baseViewHolder.setVisible(R.id.ng_moment, true)
-        //     baseViewHolder.getView<NineGridView>(R.id.ng_moment)
-        //             .setAdapter(NineImageAdapter(context, mRequestOptions, mDrawableTransitionOptions, item.images))
-        // }
         baseViewHolder.getView<NineGridView>(R.id.ng_moment)
                 .apply {
                     setAdapter(NineImageAdapter(context, mRequestOptions, mDrawableTransitionOptions, item.images))

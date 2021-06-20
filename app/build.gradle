@@ -178,7 +178,8 @@ dependencies {
     implementation 'com.kunminx.arch:unpeek-livedata:5.0.1-beta1'
     //图片查看
     implementation 'ch.ielse:imagewatcher:1.0.3'
-
+    //传递数据
+    implementation 'com.github.ssseasonnn:Bracer:1.0.3'
 
 }
 

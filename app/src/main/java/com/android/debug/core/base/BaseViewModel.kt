@@ -37,7 +37,7 @@ open class BaseViewModel : ViewModel() {
     }
 
     suspend fun <T> request(
-            showLoading: Boolean = true,
+            showLoading: Boolean = false,
             request: suspend BlogService.() -> BaseResponse<T>?
     ): BaseResponse<T> {
         return try {

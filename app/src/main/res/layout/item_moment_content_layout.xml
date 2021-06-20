@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.allen.library.CircleImageView
+        android:id="@+id/iv_moment_avatar"
+        android:layout_width="@dimen/sw_44dp"
+        android:layout_height="@dimen/sw_44dp"
+        android:layout_marginLeft="@dimen/sw_10dp"
+        android:layout_marginTop="@dimen/sw_10dp"
+        android:src="@mipmap/ic_launcher"
+        app:civ_border_color="@color/color_white"
+        app:civ_border_width="@dimen/sw_2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_moment_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/sw_8dp"
+        android:layout_marginTop="@dimen/sw_15dp"
+        android:layout_marginRight="@dimen/sw_10dp"
+        android:textColor="@color/color_2E3135"
+        android:textSize="@dimen/sw_14sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/iv_moment_avatar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="我的名字" />
+
+    <TextView
+        android:id="@+id/tv_moment_company"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/sw_8dp"
+        android:layout_marginRight="@dimen/sw_10dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/color_B4B4B6"
+        android:textSize="@dimen/sw_12sp"
+        app:layout_constraintLeft_toRightOf="@id/iv_moment_avatar"
+        app:layout_constraintRight_toLeftOf="@id/tv_day"
+        app:layout_constraintTop_toBottomOf="@id/tv_moment_name"
+        tools:text="Google高级CV工程师-腾讯头条震惊部部长首席摸鱼大师是也" />
+
+    <TextView
+        android:id="@+id/tv_moment_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sw_8dp"
+        android:layout_marginRight="@dimen/sw_10dp"
+        android:textColor="@color/color_222222"
+        android:textSize="@dimen/sw_13sp"
+        app:layout_constraintLeft_toLeftOf="@id/tv_moment_company"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_moment_avatar"
+        tools:text="今天是摸鱼的最后一天了，怎么回事啊，突然间又得上班了，广州的疫情依然很严峻，2个医护人员中招了，好像病毒比之前的还要厉害。白云区也出现了2名，如果他们都坐过地铁来5号线，那..........." />
+
+    <com.debug.widget.nine.NineGridView
+        android:id="@+id/ng_moment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sw_14dp"
+        android:layout_marginRight="@dimen/sw_10dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/tv_moment_topicName"
+        app:layout_constraintLeft_toLeftOf="@id/tv_moment_company"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_moment_content"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_moment_topicName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sw_8dp"
+        android:background="@drawable/bg_moment_topic_name"
+        android:paddingLeft="@dimen/sw_6dp"
+        android:paddingTop="@dimen/sw_3dp"
+        android:paddingRight="@dimen/sw_6dp"
+        android:paddingBottom="@dimen/sw_3dp"
+        android:textColor="@color/color_1A8BFF"
+        android:textSize="@dimen/sw_13sp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_moment_company"
+        app:layout_constraintTop_toBottomOf="@id/ng_moment"
+        tools:text="日常摸鱼" />
+
+    <TextView
+        android:id="@+id/tv_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/sw_10dp"
+        android:textColor="@color/color_ABB0B9"
+        android:textSize="@dimen/sw_10sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_moment_company"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sw_10dp"
+        android:background="@color/color_EEF2F5"
+        android:layout_marginTop="@dimen/sw_10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_moment_topicName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

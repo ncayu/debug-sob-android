@@ -3,6 +3,7 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="color_black">#000000</color>
     <color name="color_202020">#202020</color>
     <color name="color_ECECEC">#ECECEC</color>
     <color name="color_BFBFBF">#BFBFBF</color>
@@ -18,5 +19,13 @@
     <color name="color_2E3135">#2E3135</color>
     <color name="color_1A8BFF">#1A8BFF</color>
     <color name="color_869AAB">#869AAB</color>
+    <!--评论名字颜色-->
+    <color name="color_115E91">#115E91</color>
+    <color name="color_24282B">#24282B</color>
+    <color name="color_B4B4B6">#B4B4B6</color>
+    <color name="color_222222">#222222</color>
+    <color name="color_A2A9B2">#A2A9B2</color>
+    <color name="color_EEF2F5">#EEF2F5</color>
+    <color name="color_F5F5F5">#F5F5F5</color>
 
 </resources>

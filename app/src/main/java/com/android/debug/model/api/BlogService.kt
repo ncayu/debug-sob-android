@@ -39,4 +39,22 @@ interface BlogService {
      */
     @GET("/ct/moyu/list/recommend/{page}")
     suspend fun getMomentList(@Path("page") page: Int): BaseResponse<SobMoment>
+
+    /**
+     * 获取摸鱼详情
+     * @param momentId String 摸鱼帖子id
+     * @return BaseResponse<SobMomentDetail>
+     */
+    @GET("/ct/moyu/{momentId}")
+    suspend fun getMomentDetail(@Path("momentId") momentId: String): BaseResponse<SobMomentDetail>
+
+    /**
+     * 获取摸鱼详情评论
+     * @param momentId String 摸鱼帖子id
+     * @param page Int 页码最少1
+     * @return BaseResponse<SobMomentComment>
+     */
+    @GET("/ct/moyu/comment/{momentId}/{page}")
+    suspend fun getMomentComment(@Path("momentId") momentId: String, @Path("page") page: Int)
+            : BaseResponse<SobMomentComment>
 }

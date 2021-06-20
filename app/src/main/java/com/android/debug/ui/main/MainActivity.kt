@@ -22,7 +22,8 @@ import com.flyco.tablayout.listener.OnTabSelectListener
 import com.xuexiang.xupdate.XUpdate
 import java.util.*
 
-class MainActivity : BaseActivity<ActivityMain2Binding, MainViewModel>(), ImageWatcher.OnPictureLongPressListener, ImageWatcher.Loader {
+class MainActivity : BaseActivity<ActivityMain2Binding, MainViewModel>(),
+        ImageWatcher.OnPictureLongPressListener, ImageWatcher.Loader {
 
     private val mTabEntities = ArrayList<CustomTabEntity>()
     private val mFragments = ArrayList<Fragment>()
@@ -63,8 +64,8 @@ class MainActivity : BaseActivity<ActivityMain2Binding, MainViewModel>(), ImageW
     private fun initTab() {
         //全部fragment丢进去
         mFragments.clear()
-        mFragments.add(HomeFragment())
         mFragments.add(MomentFragment())
+        mFragments.add(HomeFragment())
         mFragments.add(FindFragment())
         mFragments.add(XiaoceFragment())
         mFragments.add(ProfileFragment())
