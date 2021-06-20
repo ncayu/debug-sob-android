@@ -76,6 +76,7 @@ class MomentDetailActivity : BaseActivity<ActivityMomentDetailBinding, MomentDet
     }
 
     private fun LinearLayout.setMomentContent(it: SobMomentDetail) {
+        momentDetailAdapter.setOwnerId(it.userId)
         val detail = this.getChildAt(0)
         //头像
         val avatar = detail.findViewById<CircleImageView>(R.id.iv_moment_avatar)

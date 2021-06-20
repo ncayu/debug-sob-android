@@ -16,7 +16,14 @@ import com.android.lib.common.utils.AppDateUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
-class MomentDetailAdapter : BaseQuickAdapter<SobMomentComment.ListMomentBean, BaseViewHolder>(R.layout.item_moment_comment_layout) {
+class MomentDetailAdapter : BaseQuickAdapter<SobMomentComment.ListMomentBean, BaseViewHolder>
+(R.layout.item_moment_comment_layout) {
+
+    private var ownerId: String? = null
+
+    fun setOwnerId(oid: String) {
+        ownerId = oid
+    }
 
     override fun convert(holder: BaseViewHolder, item: SobMomentComment.ListMomentBean) {
         //显示头像
@@ -47,10 +54,14 @@ class MomentDetailAdapter : BaseQuickAdapter<SobMomentComment.ListMomentBean, Ba
                 tv.setPadding(0, 10, 0, 10)
                 tv.setTextColor(context.getColor(R.color.color_black))
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimensionPixelSize(R.dimen.sw_13sp).toFloat())
-                val comment = "${it.nickname} : ${it.content}"
-                val spanString = SpannableString(comment)
+                val comment = "${it.nickname}%s : ${it.content}"
+                var up = "(作者)"
+                if (it.userId != ownerId) {
+                    up = ""
+                }
+                val spanString = SpannableString(String.format(comment, up))
                 val span = ForegroundColorSpan(context.getColor(R.color.color_115E91))
-                spanString.setSpan(span, 0, it.nickname.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+                spanString.setSpan(span, 0, it.nickname.length + up.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
                 tv.text = spanString
                 subLayout.addView(tv)
             }
