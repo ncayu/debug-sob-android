@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import ch.ielse.view.imagewatcher.ImageWatcher
@@ -11,6 +12,7 @@ import com.allen.library.CircleImageView
 import com.android.debug.R
 import com.android.debug.core.base.BaseActivity
 import com.android.debug.databinding.ActivityMomentDetailBinding
+import com.android.debug.model.bean.SobMomentDetail
 import com.android.debug.ui.adapter.MomentDetailAdapter
 import com.android.debug.utils.GlideSimpleTarget
 import com.android.debug.utils.ImageHelper
@@ -21,6 +23,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.debug.widget.nine.NineGridView
 import com.debug.widget.nine.NineImageAdapter
 import com.debug.widget.nine.Utils
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import zlc.season.bracer.mutableParams
 
 class MomentDetailActivity : BaseActivity<ActivityMomentDetailBinding, MomentDetailViewModel>(),
@@ -38,6 +41,12 @@ class MomentDetailActivity : BaseActivity<ActivityMomentDetailBinding, MomentDet
         vb.rvMomentDetail.apply {
             layoutManager = LinearLayoutManager(this@MomentDetailActivity)
             adapter = momentDetailAdapter
+            addItemDecoration(
+                    HorizontalDividerItemDecoration.Builder(context)
+                            .color(getColor(R.color.color_f2f2f2))
+                            .size(2)
+                            .build()
+            )
         }
         momentDetailAdapter.apply {
             //摸鱼详情布局
@@ -55,32 +64,7 @@ class MomentDetailActivity : BaseActivity<ActivityMomentDetailBinding, MomentDet
         viewModel.detailLiveData.observe(this) {
             //显示头部详情数据
             momentDetailAdapter.headerLayout?.apply {
-                val detail = this.getChildAt(0)
-                //头像
-                val avatar = detail.findViewById<CircleImageView>(R.id.iv_moment_avatar)
-                ImageHelper.load(avatar, it.avatar)
-                //名字
-                detail.findViewById<TextView>(R.id.tv_moment_name).text = it.nickname
-                //公司
-                val company = "${it.position}@${it.company}"
-                detail.findViewById<TextView>(R.id.tv_moment_company)
-                        .text = company
-                //摸鱼内容
-                detail.findViewById<TextView>(R.id.tv_moment_content).text = it.content
-                //多图片
-                detail.findViewById<NineGridView>(R.id.ng_moment)
-                        .apply {
-                            setAdapter(NineImageAdapter(context, mRequestOptions, mDrawableTransitionOptions, it.images))
-                            //大图片查看
-                            setOnImageClickListener { _, view ->
-                                vb.imageWatcher.show(view as ImageView, imageViews, it.images)
-                            }
-                        }
-                //摸鱼标签
-                detail.findViewById<TextView>(R.id.tv_moment_topicName).text = it.topicName ?: "随笔"
-                //摸鱼时间
-                detail.findViewById<TextView>(R.id.tv_day)
-                        .text = AppDateUtils.getExactDate(AppDateUtils.parseLong4(it.createTime))
+                setMomentContent(it)
             }
         }
         viewModel.commentListData.observe(this) {
@@ -89,6 +73,35 @@ class MomentDetailActivity : BaseActivity<ActivityMomentDetailBinding, MomentDet
             }
         }
 
+    }
+
+    private fun LinearLayout.setMomentContent(it: SobMomentDetail) {
+        val detail = this.getChildAt(0)
+        //头像
+        val avatar = detail.findViewById<CircleImageView>(R.id.iv_moment_avatar)
+        ImageHelper.load(avatar, it.avatar)
+        //名字
+        detail.findViewById<TextView>(R.id.tv_moment_name).text = it.nickname
+        //公司
+        val company = "${it.position}@${it.company}"
+        detail.findViewById<TextView>(R.id.tv_moment_company)
+                .text = company
+        //摸鱼内容
+        detail.findViewById<TextView>(R.id.tv_moment_content).text = it.content
+        //多图片
+        detail.findViewById<NineGridView>(R.id.ng_moment)
+                .apply {
+                    setAdapter(NineImageAdapter(context, mRequestOptions, mDrawableTransitionOptions, it.images))
+                    //大图片查看
+                    setOnImageClickListener { _, view ->
+                        vb.imageWatcher.show(view as ImageView, imageViews, it.images)
+                    }
+                }
+        //摸鱼标签
+        detail.findViewById<TextView>(R.id.tv_moment_topicName).text = it.topicName ?: "随笔"
+        //摸鱼时间
+        detail.findViewById<TextView>(R.id.tv_day)
+                .text = AppDateUtils.getExactDate(AppDateUtils.parseLong4(it.createTime))
     }
 
     override fun initData(savedInstanceState: Bundle?) {

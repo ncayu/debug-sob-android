@@ -1,7 +1,6 @@
 package com.android.debug.ui.fragment
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,7 +50,7 @@ class HomeFragment : BaseFragment(R.layout.layout_home), OnRefreshListener, OnLo
             adapter = recommendAdapter
             addItemDecoration(
                     HorizontalDividerItemDecoration.Builder(context)
-                            .color(Color.parseColor("#F6F6F6"))
+                            .color(context.getColor(R.color.color_f6f6f6))
                             .sizeResId(R.dimen.sw_10dp)
                             .build()
             )

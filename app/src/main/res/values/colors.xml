@@ -27,5 +27,7 @@
     <color name="color_A2A9B2">#A2A9B2</color>
     <color name="color_EEF2F5">#EEF2F5</color>
     <color name="color_F5F5F5">#F5F5F5</color>
+    <!--小分割线颜色-->
+    <color name="color_f2f2f2">#f2f2f2</color>
 
 </resources>
