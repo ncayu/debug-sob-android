@@ -48,6 +48,7 @@ class MomentDetailAdapter : BaseQuickAdapter<SobMomentComment.ListMomentBean, Ba
         holder.setText(R.id.tv_day, AppDateUtils.getExactDate(AppDateUtils.parseLong4(item.createTime)))
         val subLayout = holder.getView<LinearLayout>(R.id.ll_sub_comments)
         subLayout.visibility = View.GONE
+        subLayout.removeAllViews()
         if (item.subComments != null && item.subComments.isNotEmpty()) {
             item.subComments.forEach {
                 val tv = TextView(context)
@@ -67,8 +68,6 @@ class MomentDetailAdapter : BaseQuickAdapter<SobMomentComment.ListMomentBean, Ba
                 subLayout.addView(tv)
             }
             subLayout.visibility = View.VISIBLE
-        } else {
-            subLayout.removeAllViews()
         }
 
     }
