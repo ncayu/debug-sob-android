@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="color_black">#000000</color>
+    <color name="color_tran">#00000000</color>
     <color name="color_202020">#202020</color>
     <color name="color_ECECEC">#ECECEC</color>
     <color name="color_BFBFBF">#BFBFBF</color>
@@ -30,4 +31,8 @@
     <!--小分割线颜色-->
     <color name="color_f2f2f2">#f2f2f2</color>
 
+
+    <color name="shape1">#5d8df7</color>
+    <color name="shape2">#5EB9F8</color>
+    <color name="shape3">#5CC2F8</color>
 </resources>

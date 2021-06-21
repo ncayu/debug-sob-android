@@ -72,6 +72,7 @@ class MomentFragment : BaseFragment(R.layout.layout_tab), ImageWatcher.OnPicture
             MomentDetailActivity().apply {
                 mMomentId = momentAdapter.data[position].id
             }.start(it)
+            activity?.apply { overridePendingTransition(0, 0) }
         }
     }
 }

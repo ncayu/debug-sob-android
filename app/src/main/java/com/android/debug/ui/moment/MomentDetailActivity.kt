@@ -23,20 +23,28 @@ import com.bumptech.glide.request.RequestOptions
 import com.debug.widget.nine.NineGridView
 import com.debug.widget.nine.NineImageAdapter
 import com.debug.widget.nine.Utils
+import com.gyf.immersionbar.ktx.immersionBar
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import zlc.season.bracer.mutableParams
 
 class MomentDetailActivity : BaseActivity<ActivityMomentDetailBinding, MomentDetailViewModel>(),
-        ImageWatcher.OnPictureLongPressListener, ImageWatcher.Loader {
+        ImageWatcher.OnPictureLongPressListener, ImageWatcher.Loader, OnRefreshListener,
+        OnLoadMoreListener {
 
     var mMomentId by mutableParams<String>()
     private val mRequestOptions: RequestOptions = RequestOptions().centerCrop()
     private val mDrawableTransitionOptions: DrawableTransitionOptions = DrawableTransitionOptions.withCrossFade()
     private val momentDetailAdapter = MomentDetailAdapter()
-
+    private var mCurrentPage = 1
     override fun getLayoutId() = R.layout.activity_moment_detail
 
     override fun initView() {
+        immersionBar {
+            titleBar(R.id.toolbar)
+        }
 
         vb.rvMomentDetail.apply {
             layoutManager = LinearLayoutManager(this@MomentDetailActivity)
@@ -58,18 +66,42 @@ class MomentDetailActivity : BaseActivity<ActivityMomentDetailBinding, MomentDet
             setOnPictureLongPressListener(this@MomentDetailActivity)
             setLoader(this@MomentDetailActivity)
         }
+
+        //下拉，上拉监听
+        vb.refreshLayout.setOnRefreshListener(this)
+        vb.refreshLayout.setOnLoadMoreListener(this)
     }
 
     override fun startObserve() {
         viewModel.detailLiveData.observe(this) {
             //显示头部详情数据
             momentDetailAdapter.headerLayout?.apply {
+                vb.refreshLayout.finishRefresh()
                 setMomentContent(it)
             }
         }
         viewModel.commentListData.observe(this) {
-            it.list?.apply {
-                momentDetailAdapter.setNewInstance(this)
+            it?.apply {
+                mCurrentPage = it.currentPage
+                if (this.currentPage == 1) {
+                    vb.refreshLayout.finishRefresh()
+                    momentDetailAdapter.setNewInstance(it.list ?: mutableListOf())
+                    if (!it.isHasNext) {
+                        vb.refreshLayout.finishRefreshWithNoMoreData()
+                    }
+                } else {
+                    if (it.isHasNext) {
+                        vb.refreshLayout.finishLoadMore()
+                    } else {
+                        vb.refreshLayout.finishRefreshWithNoMoreData()
+                    }
+                    momentDetailAdapter.addData(it.list ?: mutableListOf())
+                }
+            }
+        }
+        viewModel.requestState.observe(this) {
+            if (!it) {
+                vb.refreshLayout.finishLoadMore(false)
             }
         }
 
@@ -133,5 +165,18 @@ class MomentDetailActivity : BaseActivity<ActivityMomentDetailBinding, MomentDet
         if (!vb.imageWatcher.handleBackPressed()) {
             super.onBackPressed()
         }
+    }
+
+    override fun onRefresh(refreshLayout: RefreshLayout) {
+        viewModel.getMomentDetailById(mMomentId)
+    }
+
+    override fun onLoadMore(refreshLayout: RefreshLayout) {
+        viewModel.loadMoreComment(mMomentId, mCurrentPage)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(0, 0)
     }
 }

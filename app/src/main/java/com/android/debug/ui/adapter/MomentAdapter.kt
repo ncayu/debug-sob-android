@@ -57,6 +57,7 @@ class MomentAdapter : BaseQuickAdapter<MomentBean, BaseViewHolder>(R.layout.item
                     }
                 }
         //标签
+        baseViewHolder.setVisible(R.id.tv_moment_topicName, true)
         baseViewHolder.setText(R.id.tv_moment_topicName, item.topicName ?: "随笔")
         // baseViewHolder.setVisible(R.id.tv_moment_topicName, item.topicName?.isNotEmpty() ?: false)
         //时间

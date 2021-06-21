@@ -2,8 +2,11 @@ package com.android.debug.ui.moment
 
 import androidx.lifecycle.viewModelScope
 import com.android.debug.core.base.BaseViewModel
+import com.android.debug.model.api.onFailure
+import com.android.debug.model.api.onSucceed
 import com.android.debug.model.bean.SobMomentComment
 import com.android.debug.model.bean.SobMomentDetail
+import com.android.debug.utils.AppToast
 import com.kunminx.architecture.ui.callback.UnPeekLiveData
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -18,6 +21,8 @@ class MomentDetailViewModel : BaseViewModel() {
 
     val detailLiveData = UnPeekLiveData<SobMomentDetail>()
     val commentListData = UnPeekLiveData<SobMomentComment>()
+    val requestState = UnPeekLiveData<Boolean>()
+
 
     fun getMomentDetailById(momentId: String) {
         LL.e("摸鱼id", momentId)
@@ -29,6 +34,19 @@ class MomentDetailViewModel : BaseViewModel() {
                 detailLiveData.postValue(momentInfo.data)
                 commentListData.postValue(commentList.data)
             }
+        }
+    }
+
+    fun loadMoreComment(momentId: String, page: Int) {
+        viewModelScope.launch {
+            request { getMomentComment(momentId, page) }
+                    .onSucceed {
+                        this?.apply { commentListData.postValue(this) }
+                    }
+                    .onFailure {
+                        AppToast.toast(this.toString())
+                        requestState.postValue(false)
+                    }
         }
     }
 }
